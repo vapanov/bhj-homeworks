@@ -19,7 +19,7 @@ for (let i = 0; i < sliderDots.length; i++) {
       if (sliderDots[i].classList.contains('slider__dot_active')) {
          return false;
       }
-      slideChange(sliderItemActive = i);
+      slideChange(i);
    }
 }
 
