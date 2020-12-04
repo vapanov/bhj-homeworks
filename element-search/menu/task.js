@@ -1,8 +1,5 @@
 'use strict';
 
-// console.log();
-// debugger;
-
 // Используя цикл зарегистрируйте обработчики события click на элементах с классом menu__link
 const elementsMenuLink = Array.from(document.querySelectorAll('.menu__link'));
 
