@@ -16,7 +16,24 @@ class Game {
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
+    this.timeElement = document.querySelectorAll('.symbol').length;
+    // запускаем отсчёт
+    let timerId = setInterval(this.countdown, 1000);
+
   }
+
+// функция обратного отсчёта
+  countdown() {
+   console.log("cd", this.timeElement); // не могу победить области видмости - нужно перечитать
+
+   if (this.timeElement == 0) {
+      clearInterval(timerId); //чистим таймер
+      setTimeout(() => {}, 100); // нужно чтобы успели отрисоваться нули на странице
+      this.fail();
+   }
+   this.timeElement--;
+   document.querySelector('.status__timer').textContent = 'Осталось ' + this.timeElement + ' секунд';
+}
 
   registerEvents() {
       document.addEventListener('keydown', (event) => {
