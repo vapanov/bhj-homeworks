@@ -3,9 +3,11 @@
 class Game {
   constructor(container) {
     this.container = container;
+    this.timerId = null;
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timerElement = container.querySelector('.status__timer');
 
     this.reset();
 
@@ -13,27 +15,31 @@ class Game {
   }
 
   reset() {
+    this.stopTimer();
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
-    this.timeElement = document.querySelectorAll('.symbol').length;
-    // запускаем отсчёт
-    let timerId = setInterval(this.countdown, 1000);
-
+    this.timerElement.textContent = document.querySelectorAll('.symbol').length;
+    this.startTimer();
   }
 
-// функция обратного отсчёта
-  countdown() {
-   console.log("cd", this.timeElement); // не могу победить области видмости - нужно перечитать
+  startTimer () {
+    this.timerID = setInterval(this.timer.bind(this), 1000);
+  }
 
-   if (this.timeElement == 0) {
-      clearInterval(timerId); //чистим таймер
-      setTimeout(() => {}, 100); // нужно чтобы успели отрисоваться нули на странице
+  timer () {
+    let timerCount = parseInt(this.timerElement.textContent, 10);
+    timerCount -= 1;
+    this.timerElement.textContent = timerCount;
+    if (timerCount < 0) {
       this.fail();
-   }
-   this.timeElement--;
-   document.querySelector('.status__timer').textContent = 'Осталось ' + this.timeElement + ' секунд';
-}
+    }
+  }
+
+  stopTimer () {
+    clearInterval(this.timerID);
+    this.timerID = null;
+  }
 
   registerEvents() {
       document.addEventListener('keydown', (event) => {
@@ -58,7 +64,10 @@ class Game {
       alert('Победа!');
       this.reset();
     }
+    this.stopTimer();
     this.setNewWord();
+    this.timerElement.textContent = document.querySelectorAll('.symbol').length;
+    this.startTimer();
   }
 
   fail() {
@@ -66,12 +75,14 @@ class Game {
       alert('Вы проиграли!');
       this.reset();
     }
+    this.stopTimer();
     this.setNewWord();
+    this.timerElement.textContent = document.querySelectorAll('.symbol').length;
+    this.startTimer();
   }
 
   setNewWord() {
     const word = this.getWord();
-
     this.renderWord(word);
   }
 
