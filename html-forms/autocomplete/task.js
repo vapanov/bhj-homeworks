@@ -1,3 +1,7 @@
+'use strict';
+
+//console.log();
+
 class Autocomplete {
   constructor( container ) {
     this.container = container;
