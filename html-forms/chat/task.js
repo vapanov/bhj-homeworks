@@ -21,6 +21,24 @@ chatWidgetInput.addEventListener('keydown', (evt) => {
    timerID = setInterval(msgBotIdle, 30000);
 });
 
+
+// шаблон сообщения
+function msgTemplate(msg, who = '') {
+   return `
+      <div class="message${who}">
+         <div class="message__time">${new Date().toTimeString().slice(0, 5)}</div>
+         <div class="message__text">
+            ${msg}
+         </div>
+      </div>
+   `;
+}
+
+// прокрутка
+function scrollDown() {
+   chatWidgetMessages.lastElementChild.scrollIntoView();
+}
+
 // пользователь
 function msgUser() {
    const msg = chatWidgetInput.value;
@@ -61,21 +79,4 @@ function msgBotIdle() {
    const botMsgActive = botMsgList[Math.floor(Math.random() * botMsgList.length)];
    chatWidgetMessages.insertAdjacentHTML('beforeend', msgTemplate(botMsgActive));
    scrollDown();
-}
-
-// шаблон сообщения
-function msgTemplate(msg, type = '') {
-   return `
-      <div class="message${type}">
-         <div class="message__time">${new Date().toTimeString().slice(0, 5)}</div>
-         <div class="message__text">
-            ${msg}
-         </div>
-      </div>
-   `;
-}
-
-// прокрутка
-function scrollDown() {
-   chatWidgetMessages.lastElementChild.scrollIntoView();
 }

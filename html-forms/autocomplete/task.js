@@ -85,11 +85,17 @@ class Autocomplete {
         value: 'Содержимое атрибута value'
       }
     */
+    const autocompleteListArray = Array.from(this.input.querySelectorAll('option'));
+    const autocompleteListArrayFilter = autocompleteListArray.filter((optionElement) => optionElement.text.includes(text));
     return [
-      {
-        text: 'Чубакка',
-        value: '1'
-      }
+      autocompleteListArrayFilter.reduce((accumulator, currentValue) => {
+        let elem = {
+          text: currentValue.text,
+          value: currentValue.value
+        }
+        console.log(elem);
+        accumulator.push(elem);
+      })
     ];
   }
 }
