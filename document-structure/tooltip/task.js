@@ -1,8 +1,8 @@
 'use strict';
 //console.log();
 
-// почему display: none?
 // сделать пропадание подсказки по второму клику
+// div можно ставить в любое место хтмл, позиция фиксед и координаты поставят его на место на странице
 
 // переменные
    const hasTooltips = Array.from(document.querySelectorAll('a.has-tooltip'));
@@ -10,8 +10,7 @@
    let activeHasTooltip;
 
    const tooltipDiv = document.createElement('div');
-   tooltipDiv.className = "tooltip";
-   tooltipDiv.innerHTML = "Текст подсказки";
+   tooltipDiv.className = "tooltip tooltip_active";
 
 // события
 hasTooltips.forEach((element) => 
@@ -20,16 +19,19 @@ hasTooltips.forEach((element) =>
 
       let currentElement = evt.target;
 
-      if (currentElement === activeHasTooltip) {
+      if (currentElement === activeHasTooltip || ) {
          tooltipDiv.remove();
          activeHasTooltip = '';
          return;
       }
+      activeHasTooltip = currentElement;
 
-      tooltipDiv.innerHTML = currentElement.title;
       currentElement.after(tooltipDiv);
-      console.log(tooltipDiv);
-
 
    }, false));
 
+function tooltipTemplate(currentElement) {
+   tooltipDiv.innerHTML = currentElement.title;
+   return;
+}
+.getBoundingClientRect()
