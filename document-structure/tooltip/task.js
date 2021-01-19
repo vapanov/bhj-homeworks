@@ -1,37 +1,34 @@
 'use strict';
 //console.log();
 
-// сделать пропадание подсказки по второму клику
-// div можно ставить в любое место хтмл, позиция фиксед и координаты поставят его на место на странице
-
 // переменные
-   const hasTooltips = Array.from(document.querySelectorAll('a.has-tooltip'));
+const hasTooltips = Array.from(document.querySelectorAll('a.has-tooltip'));
+let activeHasTooltip;
 
-   let activeHasTooltip;
-
-   const tooltipDiv = document.createElement('div');
-   tooltipDiv.className = "tooltip tooltip_active";
+// объект подсказки
+const tooltipDiv = document.createElement('div');
+tooltipDiv.className = "tooltip tooltip_active";
 
 // события
+document.addEventListener('scroll', (evt) => tooltipDiv.remove()); // подсказка должна пропасть при прокрутке - позиция фиксед в стилях
+
 hasTooltips.forEach((element) => 
    element.addEventListener('click', (evt) => {
       evt.preventDefault();
-
       let currentElement = evt.target;
-
-      if (currentElement === activeHasTooltip || ) {
+      if (currentElement === activeHasTooltip ) {
          tooltipDiv.remove();
          activeHasTooltip = '';
          return;
       }
       activeHasTooltip = currentElement;
-
-      currentElement.after(tooltipDiv);
-
+      document.body.append(tooltipTemplate(currentElement));
    }, false));
 
 function tooltipTemplate(currentElement) {
    tooltipDiv.innerHTML = currentElement.title;
-   return;
+   let currentElementPosition = currentElement.getBoundingClientRect();
+   tooltipDiv.setAttribute('style', `left: ${currentElementPosition.left}px; top: ${currentElementPosition.top + currentElementPosition.height}px`);
+   return tooltipDiv;
 }
-.getBoundingClientRect()
+
