@@ -1,5 +1,4 @@
 'use strict';
-//console.log();
 
 // переменные
 const hasTooltips = Array.from(document.querySelectorAll('a.has-tooltip'));
