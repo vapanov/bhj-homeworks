@@ -1,5 +1,4 @@
 'use strict';
-//console.log();
 
 const imgLoader = document.querySelector('img.loader');
 const divItems = document.querySelector('div#items');
@@ -10,18 +9,11 @@ xhr.setRequestHeader('Content-Type','application/json');
 xhr.send();
 xhr.addEventListener('readystatechange', function() {
    if (xhr.readyState === 4) {
-      
-      const currencyResponce = Object.keys(xhr.response).map(element => ({
-          CharCode: CharCode,
-          Value: Value
-      }));
-
-//      currencyResponce.forEach((element) => addCurrencyTemplate(element));
-
+      const currencyResponce = JSON.parse(xhr.response);
+      Object.values(currencyResponce.response.Valute).forEach((element) => addCurrencyTemplate(element));
       imgLoader.classList.remove('loader_active');
    };
 });
-
 
 function addCurrencyTemplate (currency) {
    divItems.insertAdjacentHTML('beforeend',
