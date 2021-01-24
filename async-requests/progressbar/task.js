@@ -14,5 +14,3 @@ formElement.addEventListener('submit', (evt) => {
    });
    xhr.send(new FormData(formElement));
    }, false);
-
-//.вроде всё правильно, а прогресс отображается 0-100 сразу (
