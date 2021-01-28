@@ -12,10 +12,7 @@ window.onload = () => {
 elementSubscribeModalClose.addEventListener('click', (evt) => {
       evt.preventDefault();
       elementSubscribeModal.className = 'modal';
-      document.cookie = `
-      subscribeModalShowed=true; 
-      Expires=${new Date(new Date().setFullYear(new Date().getFullYear() + 100)).toUTCString()}; 
-      `; // написал 100 лет, надуюсь, хватит :)
+      document.cookie = `subscribeModalShowed=true; Expires=${new Date(new Date().setFullYear(new Date().getFullYear() + 100)).toUTCString()};`; // написал 100 лет, надеюсь, хватит :)
 }, false);
 
 
